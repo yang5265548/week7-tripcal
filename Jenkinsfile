@@ -33,6 +33,16 @@ pipeline{
                 }
             }
         }
+        stage('Docker Debug Info') {
+                    steps {
+                        script {
+                            echo '===== Docker Version (Windows) ====='
+                            bat 'docker version'
+                            echo '===== Docker Info (Windows) ====='
+                            bat 'docker info'
+                        }
+                    }
+                }
                  stage('Build Docker Image') {
                             steps {
                                 // Build Docker image
