@@ -43,17 +43,7 @@ pipeline{
                         }
                     }
                 }
-                    stage('List Credentials') {
-                            steps {
-                                script {
-                                    def credentialsStore = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials.SystemCredentialsProvider')[0]
-                                    def credentials = credentialsStore.getStore(Jenkins.instance).getCredentials(com.cloudbees.plugins.credentials.CredentialsScope.GLOBAL)
-                                    credentials.each { cred ->
-                                        println("Credential ID: ${cred.id}  Type: ${cred.getClass()}")
-                                    }
-                                }
-                            }
-                        }
+
                  stage('Build Docker Image') {
                             steps {
                                 // Build Docker image
