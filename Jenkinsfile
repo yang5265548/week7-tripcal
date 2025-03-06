@@ -33,16 +33,6 @@ pipeline{
                 }
             }
         }
-        stage('Docker Debug Info') {
-                    steps {
-                        script {
-                            echo '===== Docker Version (Windows) ====='
-                            bat 'docker version'
-                            echo '===== Docker Info (Windows) ====='
-                            bat 'docker info'
-                        }
-                    }
-                }
 
                  stage('Build Docker Image') {
                             steps {
@@ -59,7 +49,9 @@ pipeline{
                                     withCredentials([usernamePassword(credentialsId: 'Docker_Hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                                                                     bat "echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin"
                                                                     bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
+                                                                    }
                                 }
+
                             }
                         }
     }
